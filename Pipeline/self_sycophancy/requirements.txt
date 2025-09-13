@@ -1,0 +1,11 @@
+inspect-ai
+datasets
+pandas
+matplotlib
+python-dotenv
+requests
+tqdm
+numpy
+groq
+openai
+scipy

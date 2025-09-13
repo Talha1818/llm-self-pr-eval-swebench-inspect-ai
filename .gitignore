@@ -1,0 +1,46 @@
+# Ignore logs inside the self_sycophancy pipeline
+Pipeline/self_sycophancy/logs/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment
+.env
+.venv/
+venv/
+Pipeline/self_sycophancy/env/
+ENV/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# MacOS
+.DS_Store
+
+# Python packaging
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Test outputs
+htmlcov/
+.coverage
+.tox/
+.pytest_cache/
+.cache/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
