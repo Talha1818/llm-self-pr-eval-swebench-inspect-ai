@@ -12,20 +12,19 @@ load_dotenv()
 EVALUATION_MODELS = [
     "openrouter/openai/gpt-oss-20b",
     "openrouter/openai/gpt-oss-120b",
-
 ]
 LIMIT_N = 10  # matches your task dataset limit
 LOG_DIR = Path(__file__).parent / "logs"
 
-def run_evaluation_for_model(model_id: str):
+def run_evaluation_for_model(eval_models:list):
     print(f"\n{'='*60}")
-    print(f"🔬 Running experiment with model: {model_id}")
+    print(f"🔬 Running experiment with model: {eval_models}")
     print(f"{'='*60}")
 
     try:
         # Unique task ID and log dir
         unique_task_id = str(uuid.uuid4())
-        unique_log_dir = LOG_DIR / f"{model_id.split('/')[-1]}_{unique_task_id}"
+        unique_log_dir = LOG_DIR / f"{eval_models[0].split('/')[-1]}_{unique_task_id}"
         unique_log_dir.mkdir(parents=True, exist_ok=True)
 
         # Create the task instance with solver models
@@ -41,7 +40,9 @@ def run_evaluation_for_model(model_id: str):
 
         results = eval(
             tasks=[task_instance],
-            model=[model_id],
+            # model=[model_id],
+            model= eval_models,
+            max_workers=min(len(eval_models), 4),  # Limit concurrent workers.
             log_dir=str(unique_log_dir),
             retry_on_error=3,
             fail_on_error=0.2,
@@ -72,15 +73,15 @@ def run_evaluation_for_model(model_id: str):
 
 
     except Exception as e:
-        print(f"❌ Error during evaluation for model {model_id}: {e}")
+        print(f"❌ Error during evaluation for model {eval_models[0]}: {e}")
         import traceback
         traceback.print_exc()
         print("⚠️ Skipping this model and continuing with next...")
 
 def main():
     LOG_DIR.mkdir(exist_ok=True)
-    for model_id in EVALUATION_MODELS:
-        run_evaluation_for_model(model_id)
+    # for model_id in EVALUATION_MODELS:
+    run_evaluation_for_model(EVALUATION_MODELS)
 
 if __name__ == "__main__":
     main()
