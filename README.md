@@ -30,4 +30,9 @@ pip install -r requirements.txt
 Next, create a `.env` file in the same directory and set your OpenRouter API key as `OPENROUTER_API_KEY=your_api_key_here`.
 
 # 6. Run the main file
-Finally, run the evaluation with `python run.py`
+Finally, run the evaluation with 
+Without Parallelization ==> `python run.py`
+With Parallelization ==> `python run2.py`
+
+# 6. Plot the results
+run the file `python plot_results.py`
